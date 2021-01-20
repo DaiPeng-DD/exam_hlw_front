@@ -9,18 +9,26 @@
 </head>
 
 <body>
+<div id="backgrondId">
+
+    <div class="main0">
+        <div class="main_left">
+            <img src="../image/login-image-1.png" class="theimg"/>
+        </div>
+    </div>
+
     <div class="nav-login">
 
 
 <!--        客户或管理员登陆选择-->
-        <div id="client"  >用户登陆 </div>
+        <div id="client" >用户登陆 </div>
         <div id="admin" >管理员登陆</div>
 
         <h2>账号登录</h2>
         <div class="user-name">
 
             <div class="user-input">
-                <input type="text" name="" id="user_acc" placeholder="账号或手机号码"/>
+                <input type="text" name="" id="user_acc" placeholder="输入账号"/>
             </div>
 
 <!--            添加验证返回消息-->
@@ -61,14 +69,77 @@
         <div class="mailApp">
         </div>
     </div>
-
+</div>
 </body>
 
 
 <script src="../js/jquery-3.5.1.min.js"></script>
-<script src="../js/jqValidata.js"></script>
+<script src="../js/jquery.validate.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/url.js"></script>
 
 <script>
+
+    $("#client").click(function () {
+            $("#client").css({"color":"white","backgroundColor":"#3b78dd","font-size":"18px"});
+            $("#admin").css({"color":"black","backgroundColor": "white","font-size":"16px"});
+    })
+
+    $("#admin").click(function () {
+            $("#admin").css({"color":"white","backgroundColor":"#3b78dd","font-size":"18px"});
+            $("#client").css({"color":"black","backgroundColor": "white","border":"1px solid black","font-size":"16px"});
+        }
+    )
+
+    var jsondata = {};
+    $("#user_submit").click(function () {
+
+           
+            jsondata.user_acc=$("#user_acc");
+            jsondata.user_pwd=$("#user_pwd");
+
+
+            if ($("#admin").css("font-size")=="18px"){
+                console.log($("#admin").css("font-size")=="18px");
+
+                if ($("#user_acc").val()=="root"&&$("#user_pwd").val()=="root"){
+                    alert("登陆成功");
+                    window.location="adminhome.html";
+
+
+                }else{
+                    alert("账号或密码错误");
+                }
+
+
+
+            }
+            if ($("#client").css("font-size")=="18px"){
+                console.log($("#client").css("font-size")=="18px");
+
+                $.ajax({
+                    type:"POST",
+                    uri:globalUrl+"/volidateUser",
+                    contentType:"application/json",
+                    dataType:"josn",
+                    data:JSON.stringify(jsondata),
+                    success:function (result) {
+                        if (result.mark){
+                            alert("登陆成功");
+
+                            localStorage.setItem("user_acc",$("#user_acc").val());
+                            localStorage.setItem("user_headsrc",result.user.user_headsrc);
+                            localStorage.setItem("user_phone",result.user.user_phone);
+                            localStorage.setItem("user_email",result.user.user_eamil)
+
+                            window.location="home.html";
+                        }
+
+                    }
+                })
+
+            }
+    })
 
 
 </script>

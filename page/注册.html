@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link  rel="stylesheet" type="text/css" href="../css/zhuce.css">
+</head>
+<body>
+<div class="main" >
+<!--    <div class="main0">-->
+<!--        <div class="main_left">-->
+<!--            <img src="../image/zhuce-image-3.png" class="theimg"/>-->
+<!--            <img src="../image/zhuce-image-2.png" class="secimg"/>-->
+<!--            <img src="../image/zhuce-image-1.png" class="firimg"/>-->
+<!--        </div>-->
+        <div class="main_right">
+            <span id="gologin"><a href="login.html">已有账号</a></span>
+            <h2>账号注册平台</h2>
+
+
+            <div class="In">昵称：&nbsp;&nbsp;&nbsp;<input type="text" id="name"><span></span>
+            </div>
+
+            <div class="In">
+                账号：&nbsp;&nbsp;&nbsp;<input type="text" id="acc"><span id="accspan"></span>
+            </div>
+
+            <div class="In">
+                密码：&nbsp;&nbsp;&nbsp;<input type="password" id="pwd1"><span></span>
+            </div>
+
+<!--            <div>-->
+<!--                确认密码：<input type="password" id="pwd2"><span></span>-->
+<!--            </div>-->
+            <div class="In">
+                手机号：<input type="number" id="phone"><span id="#phonespan"></span>
+            </div>
+
+            <div class="In">
+                邮箱：&nbsp;&nbsp;&nbsp;<input type="email" id="eamil"><span></span>
+            </div>
+            <button id="submit">注册</button>
+        </div>
+
+    </div>
+</div>
+</body>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/jquery.validate.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/url.js"></script>
+
+
+<script>
+
+
+    var phonestatus;
+    var accstatus;
+    $("#acc").blur(function (){
+
+        var jsondata={};
+        jsondata.user_acc=$("#acc").val();
+
+        $.ajax({
+            type:"POST",
+            uri:globalUrl+"/volidateAcc",
+            contentType:"application/json",
+            dataType:"josn",
+            data:JSON.stringify(jsondata),
+            success:function (result) {
+                if (result.mark){
+                    accstatus=true;
+                }
+                else {
+                    accstatus=false;
+                }
+
+            }
+        })
+
+        if (accstatus){
+            $("#accspan").text("账号未注册过")
+        }else {
+            $("#accspan").text("账号已注册过")
+        }
+
+    })
+
+
+
+    $("#phone").blur(function f() {
+        var jsondata={};
+        jsondata.user_acc=$("#phone").val();
+
+        $.ajax({
+            type:"POST",
+            uri:globalUrl+"/volidatePhone",
+            contentType:"application/json",
+            dataType:"josn",
+            data:JSON.stringify(jsondata),
+            success:function (result) {
+                if (result.mark){
+                    phonestatus=true;
+                }
+                else {
+                    phonestatus=false;
+                }
+
+            }
+        })
+
+        if (phonestatus){
+            $("#phonespan").text("手机号未注册过")
+        }else {
+            $("#phonespan").text("手机已注册过")
+        }
+
+    })
+
+    $("#submit").click(function () {
+        if(phonestatus&&accstatus){
+            $.ajax({
+                type:"POST",
+                uri:globalUrl+"/registerUser",
+                contentType:"application/json",
+                dataType:"josn",
+                data:JSON.stringify(jsondata),
+                success:function (result) {
+                    if (result.mark){
+                        window.location="zhuceSucc.html";
+                    }
+                    else {
+                        alert("注册失败");
+                    }
+
+                }
+            })
+        }
+
+    })
+</script>
+</html>
