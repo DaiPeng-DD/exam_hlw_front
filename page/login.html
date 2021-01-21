@@ -95,8 +95,8 @@
     $("#user_submit").click(function () {
 
            
-            jsondata.user_acc=$("#user_acc");
-            jsondata.user_pwd=$("#user_pwd");
+            jsondata.userAcc=$("#user_acc");
+            jsondata.userPwd=$("#user_pwd");
 
 
             if ($("#admin").css("font-size")=="18px"){
@@ -119,18 +119,18 @@
 
                 $.ajax({
                     type:"POST",
-                    uri:globalUrl+"/volidateUser",
+                    url:globalUrl+"/volidateUser",
                     contentType:"application/json",
-                    dataType:"josn",
+                    dataType:"json",
                     data:JSON.stringify(jsondata),
                     success:function (result) {
                         if (result.mark){
                             alert("登陆成功");
 
                             localStorage.setItem("user_acc",$("#user_acc").val());
-                            localStorage.setItem("user_headsrc",result.user.user_headsrc);
-                            localStorage.setItem("user_phone",result.user.user_phone);
-                            localStorage.setItem("user_email",result.user.user_eamil)
+                            localStorage.setItem("user_headsrc",result.user.userHeadsrc);
+                            localStorage.setItem("user_phone",result.user.userPhone);
+                            localStorage.setItem("user_email",result.user.userEamil)
 
                             window.location="home.html";
                         }

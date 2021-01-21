@@ -59,13 +59,13 @@
     $("#acc").blur(function (){
 
         var jsondata={};
-        jsondata.user_acc=$("#acc").val();
+        jsondata.userAcc=$("#acc").val();
 
         $.ajax({
             type:"POST",
-            uri:globalUrl+"/volidateAcc",
+            url:globalUrl+"/volidateAcc",
             contentType:"application/json",
-            dataType:"josn",
+            dataType:"json",
             data:JSON.stringify(jsondata),
             success:function (result) {
                 if (result.mark){
@@ -90,13 +90,13 @@
 
     $("#phone").blur(function f() {
         var jsondata={};
-        jsondata.user_acc=$("#phone").val();
+        jsondata.userPhone=$("#phone").val();
 
         $.ajax({
             type:"POST",
-            uri:globalUrl+"/volidatePhone",
+            url:globalUrl+"/volidatePhone",
             contentType:"application/json",
-            dataType:"josn",
+            dataType:"json",
             data:JSON.stringify(jsondata),
             success:function (result) {
                 if (result.mark){
@@ -121,9 +121,9 @@
         if(phonestatus&&accstatus){
             $.ajax({
                 type:"POST",
-                uri:globalUrl+"/registerUser",
+                url:globalUrl+"/registerUser",
                 contentType:"application/json",
-                dataType:"josn",
+                dataType:"json",
                 data:JSON.stringify(jsondata),
                 success:function (result) {
                     if (result.mark){
