@@ -59,3 +59,15 @@ button{
 
 }
 
+#acc{
+	position: relative;
+}
+#phone{
+	position: relative;
+}
+
+.spanstyle{
+	position: absolute;
+	margin-left: 10px;
+}
+

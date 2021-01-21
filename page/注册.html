@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
@@ -22,7 +24,7 @@
             </div>
 
             <div class="In">
-                账号：&nbsp;&nbsp;&nbsp;<input type="text" id="acc"><span id="accspan"></span>
+                账号：&nbsp;&nbsp;&nbsp;<input type="text" id="acc"><span id="accspan" class="spanstyle"></span>
             </div>
 
             <div class="In">
@@ -33,11 +35,11 @@
 <!--                确认密码：<input type="password" id="pwd2"><span></span>-->
 <!--            </div>-->
             <div class="In">
-                手机号：<input type="number" id="phone"><span id="#phonespan"></span>
+                手机号：<input type="number" id="phone"><span id="phonespan" class="spanstyle"></span>
             </div>
 
             <div class="In">
-                邮箱：&nbsp;&nbsp;&nbsp;<input type="email" id="eamil"><span></span>
+                邮箱：&nbsp;&nbsp;&nbsp;<input type="email" id="email"><span></span>
             </div>
             <button id="submit">注册</button>
         </div>
@@ -56,11 +58,10 @@
 
     var phonestatus;
     var accstatus;
-
     $("#acc").blur(function (){
 
-        var jsondata={};
-        jsondata.user_acc=$("#acc").val();
+        let jsondata={};
+        jsondata.userAcc=$("#acc").val();
 
         $.ajax({
             type:"POST",
@@ -69,29 +70,32 @@
             dataType:"json",
             data:JSON.stringify(jsondata),
             success:function (result) {
-                console.log(result);
-                if (result){
+
+                console.log(result)
+
+                if (result/*.mark*/){
                     accstatus=true;
                 }
                 else {
                     accstatus=false;
                 }
 
-                if (accstatus){
-                    $("#accspan").text("账号未注册过")
-                }else {
-                    $("#accspan").text("账号已注册过")
-                }
-
             }
         })
+
+        if (accstatus){
+            $("#accspan").text("账号未注册过")
+        }else {
+            $("#accspan").text("账号已注册过")
+        }
+
     })
 
 
 
-    $("#phone").blur(function f() {
-        var jsondata={};
-        jsondata.user_acc=$("#phone").val();
+    $("#phone").blur(function () {
+        let jsondata={};
+        jsondata.userPhone=$("#phone").val();
 
         $.ajax({
             type:"POST",
@@ -100,25 +104,35 @@
             dataType:"json",
             data:JSON.stringify(jsondata),
             success:function (result) {
-                console.log(result);
-                if (result){
+                if (result/*.mark*/){
                     phonestatus=true;
                 }
                 else {
                     phonestatus=false;
                 }
 
-
-                if (phonestatus){
-                    $("#phonespan").text("手机号未注册过")
-                }else {
-                    $("#phonespan").text("手机已注册过")
-                }
             }
         })
+
+        if (phonestatus){
+            $("#phonespan").text("手机号未注册过")
+        }else {
+            $("#phonespan").text("手机已注册过")
+        }
+
     })
 
     $("#submit").click(function () {
+
+        let jsondata={};
+        jsondata.userAcc=$("#acc").val();
+        jsondata.userPhone=$("#phone").val();
+        jsondata.userPwd=$("#pwd1").val();
+        jsondata.userName=$("#name").val();
+        jsondata.userEmail=$("#email").val();
+
+        console.log(jsondata)
+
         if(phonestatus&&accstatus){
             $.ajax({
                 type:"POST",
@@ -127,15 +141,17 @@
                 dataType:"json",
                 data:JSON.stringify(jsondata),
                 success:function (result) {
-                    if (result){
+                    if (result/*.mark*/){
                         window.location="zhuceSucc.html";
                     }
                     else {
                         alert("注册失败");
                     }
+
                 }
             })
         }
+
     })
 </script>
 </html>
