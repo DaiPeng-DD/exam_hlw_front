@@ -95,8 +95,8 @@
     $("#user_submit").click(function () {
 
            
-            jsondata.userAcc=$("#user_acc");
-            jsondata.userPwd=$("#user_pwd");
+            jsondata.userAcc=$("#user_acc").val();
+            jsondata.userPwd=$("#user_pwd").val();
 
 
             if ($("#admin").css("font-size")=="18px"){
@@ -124,13 +124,24 @@
                     dataType:"json",
                     data:JSON.stringify(jsondata),
                     success:function (result) {
-                        if (result.mark){
+                        // if (result.mark){
+                        //     alert("登陆成功");
+                        //
+                        //     localStorage.setItem("userAcc",$("#user_acc").val());
+                        //     localStorage.setItem("userHeadsrc",result.user.userHeadsrc);
+                        //     localStorage.setItem("userPhone",result.user.userPhone);
+                        //     localStorage.setItem("userEmail",result.user.userEamil);
+                        //
+                        //     window.location="home.html";
+                        // }
+
+                        if (result!=null){
                             alert("登陆成功");
 
-                            localStorage.setItem("user_acc",$("#user_acc").val());
-                            localStorage.setItem("user_headsrc",result.user.userHeadsrc);
-                            localStorage.setItem("user_phone",result.user.userPhone);
-                            localStorage.setItem("user_email",result.user.userEamil)
+                            localStorage.setItem("userAcc",$("#user_acc").val());
+                            localStorage.setItem("userHeadsrc",result.userHeadsrc);
+                            localStorage.setItem("userPhone",result.userPhone);
+                            localStorage.setItem("userEmail",result.userEmail);
 
                             window.location="home.html";
                         }
