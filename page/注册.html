@@ -56,6 +56,7 @@
 
     var phonestatus;
     var accstatus;
+
     $("#acc").blur(function (){
 
         var jsondata={};
@@ -63,27 +64,27 @@
 
         $.ajax({
             type:"POST",
-            uri:globalUrl+"/volidateAcc",
+            url:globalUrl+"/volidateAcc",
             contentType:"application/json",
-            dataType:"josn",
+            dataType:"json",
             data:JSON.stringify(jsondata),
             success:function (result) {
-                if (result.mark){
+                console.log(result);
+                if (result){
                     accstatus=true;
                 }
                 else {
                     accstatus=false;
                 }
 
+                if (accstatus){
+                    $("#accspan").text("账号未注册过")
+                }else {
+                    $("#accspan").text("账号已注册过")
+                }
+
             }
         })
-
-        if (accstatus){
-            $("#accspan").text("账号未注册过")
-        }else {
-            $("#accspan").text("账号已注册过")
-        }
-
     })
 
 
@@ -94,49 +95,47 @@
 
         $.ajax({
             type:"POST",
-            uri:globalUrl+"/volidatePhone",
+            url:globalUrl+"/volidatePhone",
             contentType:"application/json",
-            dataType:"josn",
+            dataType:"json",
             data:JSON.stringify(jsondata),
             success:function (result) {
-                if (result.mark){
+                console.log(result);
+                if (result){
                     phonestatus=true;
                 }
                 else {
                     phonestatus=false;
                 }
 
+
+                if (phonestatus){
+                    $("#phonespan").text("手机号未注册过")
+                }else {
+                    $("#phonespan").text("手机已注册过")
+                }
             }
         })
-
-        if (phonestatus){
-            $("#phonespan").text("手机号未注册过")
-        }else {
-            $("#phonespan").text("手机已注册过")
-        }
-
     })
 
     $("#submit").click(function () {
         if(phonestatus&&accstatus){
             $.ajax({
                 type:"POST",
-                uri:globalUrl+"/registerUser",
+                url:globalUrl+"/registerUser",
                 contentType:"application/json",
-                dataType:"josn",
+                dataType:"json",
                 data:JSON.stringify(jsondata),
                 success:function (result) {
-                    if (result.mark){
+                    if (result){
                         window.location="zhuceSucc.html";
                     }
                     else {
                         alert("注册失败");
                     }
-
                 }
             })
         }
-
     })
 </script>
 </html>
