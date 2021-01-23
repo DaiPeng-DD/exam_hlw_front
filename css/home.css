@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#home_top{
+    width: 100%;
+    height: 70px;
+    background-color: rgb(9,150,207);
+}
+#home_main{
+    width: 100%;
+    position: relative;
+}
+#home_lefts{
+    width: 12%;
+    height: 620px;
+    float: left;
+}
+#home_lefts>div{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+#home_lefts>div:hover{
+    background-color: rgb(240,240,240);
+}
+#home_right{
+    width: 87.9%;
+    /*height: 700px;*/
+    background-color: rgb(236,236,236);
+    float: right;
+}
+#tledu{
+    color: white;
+    width: 500px;
+    height: 100%;
+    line-height: 70px;
+    padding-left: 40px;
+    float: left;
+    font-size: 32px;
+}
+#user{
+    width: 200px;
+    height: 40px;
+    float: right;
+    margin-top: 15px;
+}
+#user_head{
+    width: 40px;
+    height: 100%;
+    border-radius: 50%;
+    background-image: url("../image/user-head.jpg");
+    background-size: 100% 100%;
+    float: left;
+}
+#user_name{
+    width: 100px;
+    height: 100%;
+    line-height: 40px;
+    margin-left: 10px;
+    color: white;
+    float: left;
+}
+#right_content{
+    width: 96.5%;
+    /*height: 500px;*/
+    margin: auto;
+    background-color: white;
+    margin-top: 20px;
+}
+#content_bottom{
+    width: 96.5%;
+    height: 150px;
+    margin: auto;
+    margin-top: 20px;
+}
+#right_top{
+    width: 99.9%;
+    height: 50px;
+    line-height: 50px;
+    background-color: white;
+    border-left: 1px solid rgb(236,236,236);
+}
+#right_top>#right_index{
+    display: inline-block;
+    margin-left: 28px;
+}

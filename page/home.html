@@ -2,9 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>主页</title>
+    <link rel="stylesheet" href="../css/home.css">
 </head>
 <body>
+<!--首页头部标题栏-->
+    <div id="home_top">
+        <div id="tledu">TLEDU在线考试系统</div>
+        <div id="user">
+<!--            头像-->
+            <div id="user_head"></div>
+<!--            用户名-->
+            <div id="user_name">用户名</div>
+        </div>
+    </div>
+<!--首页主要部分-->
+    <div id="home_main">
+<!--        左侧导航栏-->
+        <div id="home_lefts">
+            <div>管理首页</div>
+            <div id="home_questionBank">题库管理</div>
+            <div id="home_questionPaper">试卷管理</div>
+            <div id="home_questionExam">考试管理</div>
+        </div>
 
+<!--        右侧内容展示栏-->
+        <div id="home_right">
+<!--            -->
+            <div id="right_top">
+                <span id="right_index"><b>首页</b></span>
+                <span id="right_title"></span>
+            </div>
+<!--           主要内容  用于点击导航栏 跳转页面  load（）方法-->
+            <div id="right_content"></div>
+<!--           底部预留 存放备案号 联系方式等-->
+            <div id="content_bottom">
+                预留部分
+            </div>
+        </div>
+    </div>
 </body>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script>
+//定义一个全局的变量  判断添加试题与修改试题界面的不同
+    var flag = 0;
+//定义一个全局变量 接收修改试题时的试题信息
+    var questionGlobal;
+
+//    从localstorage中拿出用户名填入
+    $("#user_name").text(localStorage.getItem("userAcc"));
+
+//<!--    改变当前页的标题-->
+    $("#home_lefts>div").click(function () {
+        $("#right_title").text("> "+$(this).text());
+    })
+
+//<!--    题库管理界面-->
+    $("#home_questionBank").click(function () {
+        //跳转页面
+        $("#right_content").load("questionbank.html");
+    })
+
+//<!--    试卷管理界面-->
+    $("#home_questionPaper").click(function () {
+        //跳转页面
+        $("#right_content").load("adminhome.html");
+    })
+
+//<!--    考试管理界面-->
+    $("#home_questionExam").click(function () {
+        //跳转页面
+        $("#right_content").load("");
+    })
+
+</script>
 </html>

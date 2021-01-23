@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看试题</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            width: 200px;
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+        li{
+            width: 100%;
+            list-style: none;
+            height:32px;
+            line-height: 32px;
+            margin-left: 20px;
+        }
+        ul li:first-child{
+            margin-left: 0;
+        }
+        .singleType,.shortType{
+            font-size: 18px;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <ul id="singleQuestion">
+        <li><span class="singleType"></span></li>
+        <li>分类:<span class="singleClassify"></span></li>
+        <li>题目:<span class="singleTopic"></span></li>
+        <li>A:<span class="singleA"></span></li>
+        <li>B:<span class="singleB"></span></li>
+        <li>C:<span class="singleC"></span></li>
+        <li>D:<span class="singleD"></span></li>
+        <li>正确答案:<span class="singleAnswer"></span></li>
+        <li>分值:<span class="singleScore"></span></li>
+    </ul>
+    <ul id="shortAnswer">
+        <li><span class="shortType"></span></li>
+        <li>分类:<span class="shortClassify"></span></li>
+        <li>题目:<span class="shortTopic"></span></li>
+        <li>正确答案:<span class="shortAnswer"></span></li>
+        <li>分值:<span class="shortScore"></span></li>
+    </ul>
+</body>
+</html>

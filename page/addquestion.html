@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加试题</title>
+    <link rel="stylesheet" href="../css/addquestion.css">
+</head>
+<body>
+    <div id="addTest_main">
+        <div id="addTest_middle">
+            <h3></h3>
+            <ul id="main_title">
+                <li id="l0">试题类型</li>
+                <li id="l1">单项选择题</li>
+                <li id="l2">简答题</li>
+            </ul>
+            <div id="left_table">
+                <table>
+                    <tr>
+                        <td class="t1">试题内容</td>
+                        <td class="t2"></td>
+                    </tr>
+                    <tr>
+                        <td class="t1"></td>
+                        <td class="t2">
+                            <textarea class="area" cols="60" rows="7"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1"></td>
+                        <td class="t2">A <br>
+                            <textarea class="area" cols="60" rows="6"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1"></td>
+                        <td class="t2">B<br>
+                            <textarea class="area" cols="60" rows="6"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1"></td>
+                        <td class="t2">C<br>
+                            <textarea class="area" cols="60" rows="6"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1"></td>
+                        <td class="t2">D<br>
+                            <textarea class="area" cols="60" rows="6"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1 heig">正确答案</td>
+                        <td class="t2 heig" id="anser_true">
+                            <input type="radio" name="anser" value="A">A
+                            <input type="radio" name="anser" value="B">B
+                            <input type="radio" name="anser" value="C">C
+                            <input type="radio" name="anser" value="D">D
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1 heig">参考分数</td>
+                        <td class="t2 heig"><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td class="t1 heig">试题分类</td>
+                        <td class="t2 heig">
+                            <select id="left_sele">
+                                <option id="left_opt">请选择分类</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1 heig"></td>
+                        <td class="t2 heig">
+                            <button id="left_but">提&nbsp&nbsp交</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="right_right">
+                <table>
+                    <tr>
+                        <td class="t1">试题内容</td>
+                        <td class="t2"></td>
+                    </tr>
+                    <tr>
+                        <td class="t1"></td>
+                        <td class="t2">
+                            <textarea class="area" cols="60" rows="7"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1">答案解析</td>
+                        <td class="t2"></td>
+                    </tr>
+                    <tr>
+                        <td class="t1 heig"></td>
+                        <td class="t2 heig">
+                            <textarea class="area" cols="60" rows="7"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1 heig">参考分数</td>
+                        <td class="t2 heig"><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td class="t1 heig">试题分类</td>
+                        <td class="t2 heig">
+                            <select id="right_sele">
+                                <option id="right_opt">请选择分类</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="t1 heig"></td>
+                        <td class="t2 heig">
+                            <button id="right_but">提&nbsp&nbsp交</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/url.js"></script>
+<script src="../js/addquestion.js"></script>
+</html>
