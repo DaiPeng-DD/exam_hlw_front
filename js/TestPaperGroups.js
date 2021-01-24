@@ -8,9 +8,11 @@ function reLoad(){
     $('#middle_table').bootstrapTable('refresh');
 }
 
-//bootstrap-table表格
+var acc=localStorage.getItem("userACC");
+
+//bootstrap-table表格   查询分组
 function load() {
-    let url = globalUrl+"/queryClassify";
+    let url = globalUrl+"/queryGroups";
 
     $("#middle_table").bootstrapTable({
         url:url,
@@ -28,7 +30,7 @@ function load() {
             var temp = {
                 offset:params.offset,//SQL语句起使索引
                 pageNumber: params.limit,//每页显示数量
-                acc:"admin"
+                acc:acc
             }
             return JSON.stringify(temp);
         },
@@ -42,10 +44,10 @@ function load() {
                 }
             },
             {
-                title:'分类名称',
+                title:'分组名称',
                 align:"center",
                 halign:"center",
-                field:"classifyName",
+                field:"groupName",
                 // formatter:function (value,row,index) {
                 //     console.log(row)
                 //
@@ -53,23 +55,13 @@ function load() {
                 // }
             },
             {
-                title:'添加时间',
-                align:"center",
-                halign:"center",
-                field:"classifyCreatetime",
-                formatter:function (value,row,index) {
-
-                    return value.year+"-"+value.monthValue+"-"+value.dayOfYear+" "+value.hour+":"+value.minute+":"+value.second;
-                }
-            },
-            {
                 title: "管理",
                 align:"center",
-                field:"classifyId",
+                field:"GroupId",
                 formatter:function (value,row,index) {
-                    let delerow = '<a href="javascript:void(0)" onclick="deleteClassify(\''+value+'\')">删除</a>'
+                    let delerow = '<a href="javascript:void(0)" onclick="deleteGroups(\''+value+'\')">删除</a>'
 
-                    let updarow = '<a href="javascript:void(0)" onclick="updataClassify(\''+row.classifyId+'\',\''+row.classifyName+'\',\''+row.classifyAcc+'\')">修改 </a>'
+                    let updarow = '<a href="javascript:void(0)" onclick="updataGroups(\''+row.groupId+'\',\''+row.groupName+'\',\''+row.groupAcc+'\')">修改 </a>'
 
                     return updarow+delerow;
                 }
@@ -78,14 +70,14 @@ function load() {
     })
 }
 
-//添加分类
+//添加分组
 $("#middle_btn").click(function () {
     var jsonData = {
-        classifyName:$("#middle_ipt").val(),
+        GroupsName:$("#middle_ipt").val(),
         classifyAcc:localStorage.getItem("userAcc")
     }
     $.ajax({
-        url: globalUrl + "/addClassify",//地址
+        url: globalUrl + "/insertGroups",//地址
         type: "POST",//传输方式
         data: JSON.stringify(jsonData),//将json格式转换为字符串并进行传送
         contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
@@ -104,13 +96,13 @@ $("#middle_btn").click(function () {
     })
 })
 
-//删除分类
-function deleteClassify(value) {
+//删除分组
+function deleteGroups(value) {
     var jsonData = {
         id:value
     }
     $.ajax({
-        url: globalUrl + "/deleteClassify",//地址
+        url: globalUrl + "/deleteGroups",//地址
         type: "POST",//传输方式
         data: jsonData,//将json格式转换为字符串并进行传送
         // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
@@ -129,10 +121,10 @@ function deleteClassify(value) {
     })
 }
 
-//修改分类
-function updataClassify(id,name,acc) {
+//修改分组
+function updataGroups(id,name,acc) {
 
-    var update = prompt("修改分类",name)
+    var update = prompt("修改分组",name)
     if (update!=null && update!=""){
         var jsonData = {
             id:id,
@@ -140,7 +132,7 @@ function updataClassify(id,name,acc) {
             acc:acc
         }
         $.ajax({
-            url: globalUrl + "/updateClassify",//地址
+            url: globalUrl + "/updateGroups",//地址
             type: "POST",//传输方式
             data: jsonData,//将json格式转换为字符串并进行传送
             // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
