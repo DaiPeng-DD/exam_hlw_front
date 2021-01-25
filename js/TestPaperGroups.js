@@ -8,7 +8,7 @@ function reLoad(){
     $('#middle_table').bootstrapTable('refresh');
 }
 
-var acc=localStorage.getItem("userACC");
+// var acc=localStorage.getItem("userACC");
 
 //bootstrap-table表格   查询分组
 function load() {
@@ -30,7 +30,7 @@ function load() {
             var temp = {
                 offset:params.offset,//SQL语句起使索引
                 pageNumber: params.limit,//每页显示数量
-                acc:acc
+                acc:localStorage.getItem("userAcc")
             }
             return JSON.stringify(temp);
         },
@@ -57,7 +57,7 @@ function load() {
             {
                 title: "管理",
                 align:"center",
-                field:"GroupId",
+                field:"groupId",
                 formatter:function (value,row,index) {
                     let delerow = '<a href="javascript:void(0)" onclick="deleteGroups(\''+value+'\')">删除</a>'
 
@@ -73,11 +73,11 @@ function load() {
 //添加分组
 $("#middle_btn").click(function () {
     var jsonData = {
-        GroupsName:$("#middle_ipt").val(),
-        classifyAcc:localStorage.getItem("userAcc")
+        groupName:$("#middle_ipt").val(),
+        groupAcc:localStorage.getItem("userAcc")
     }
     $.ajax({
-        url: globalUrl + "/insertGroups",//地址
+        url: globalUrl + "/addGroups",//地址
         type: "POST",//传输方式
         data: JSON.stringify(jsonData),//将json格式转换为字符串并进行传送
         contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
@@ -99,13 +99,14 @@ $("#middle_btn").click(function () {
 //删除分组
 function deleteGroups(value) {
     var jsonData = {
-        id:value
+        groupId:value
     }
+    console.log(jsonData);
     $.ajax({
         url: globalUrl + "/deleteGroups",//地址
         type: "POST",//传输方式
-        data: jsonData,//将json格式转换为字符串并进行传送
-        // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
+        data: JSON.stringify(jsonData),//将json格式转换为字符串并进行传送
+        contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
         dataType: "json",//传入后端的数据格式也是json
         success: function (result) {
             console.log(result);
@@ -123,19 +124,18 @@ function deleteGroups(value) {
 
 //修改分组
 function updataGroups(id,name,acc) {
-
     var update = prompt("修改分组",name)
     if (update!=null && update!=""){
         var jsonData = {
-            id:id,
-            name:update,
-            acc:acc
+            groupId:id,
+            groupName:update,
+            groupAcc:acc
         }
         $.ajax({
             url: globalUrl + "/updateGroups",//地址
             type: "POST",//传输方式
-            data: jsonData,//将json格式转换为字符串并进行传送
-            // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
+            data: JSON.stringify(jsonData),//将json格式转换为字符串并进行传送
+            contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
             dataType: "json",//传入后端的数据格式也是json
             success: function (result) {
                 console.log(result);

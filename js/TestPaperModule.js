@@ -5,7 +5,7 @@ $(function () {
 //刷新表格
 function reLoad(){
     //bt表格会自动搞定刷新数据
-    $('#myTable').bootstrapTable('refresh');
+    $('#testPaperTable').bootstrapTable('refresh');
 }
 
 
@@ -15,7 +15,7 @@ function reLoad(){
 function load() {
     let url = globalUrl+"/queryTestPaper";
 
-    $("#myTable").bootstrapTable({
+    $("#testPaperTable").bootstrapTable({
         url:url,
         method:'POST',//
         dataType:'JSON',//服务器返回的数据类型
@@ -60,15 +60,15 @@ function load() {
                 align:"center",
                 halign:"center",
                 field:"testCreatetime",
-                formatter:function (value,row,index) {
-
-                    return value.year+"-"+value.monthValue+"-"+value.dayOfYear+" "+value.hour+":"+value.minute+":"+value.second;
-                }
+                // formatter:function (value,row,index) {
+                //
+                //     return value.year+"-"+value.monthValue+"-"+value.dayOfYear+" "+value.hour+":"+value.minute+":"+value.second;
+                // }
             },
             {
                 title: "管理",
                 align:"center",
-                field:"questionId",
+                field:"testId",
                 formatter:function (value,row,index) {
                     let action ='<a href="javascript:void(0)" onclick="actionTestpaper(\''+value+'\')">开启考试 </a>'
                     let unaction = '<a href="javascript:void(0)" onclick="unactionTestpaper(\''+value+'\')">关闭考试 </a>'
@@ -88,20 +88,23 @@ function load() {
 function queryTestPaper(id,name){
     localStorage.setItem("testPaperId",id);
     localStorage.setItem("testPaperName",name);
+    // console.log(localStorage.getItem("testPaperId"));
+    // console.log(localStorage.getItem("testPaperName"));
     window.location="TestPaper.html";
-
+    // $("#right_content").load("TestPaper.html");
 }
+
 
 //删除试卷
 function deleteTestpaper(value) {
     var jsonData = {
-        id:value
+        testId:value
     }
     $.ajax({
         url: globalUrl + "/deleteTestPaper",//地址
         type: "POST",//传输方式
-        data: jsonData,//将json格式转换为字符串并进行传送
-        // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
+        data: JSON.stringify(jsonData),//将json格式转换为字符串并进行传送
+        contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
         dataType: "json",//传入后端的数据格式也是json
         success: function (result) {
             console.log(result);

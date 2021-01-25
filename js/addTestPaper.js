@@ -5,7 +5,7 @@ $(function () {
 //刷新表格
 function reLoad(){
     //bt表格会自动搞定刷新数据
-    $('#middle_table').bootstrapTable('refresh');
+    $('#myTable').bootstrapTable('refresh');
 }
 
 
@@ -29,7 +29,7 @@ function load() {
             var temp = {
                 offset:params.offset,//SQL语句起使索引
                 pageNumber: params.limit,//每页显示数量
-                acc:acc
+                acc:localStorage.getItem("userAcc")
             }
             return JSON.stringify(temp);
         },
@@ -54,7 +54,7 @@ function load() {
                 halign:"center",
                 field:"groupName",
                 formatter:function (value,row,index) {
-                    let select = '<input type="radio" name="name">'
+                    let select = '<input type="radio" name="name" value="\''+value+'\'">'
                     return select;
                 }
             }
@@ -64,14 +64,15 @@ function load() {
 }
 
 
-var acc=localStorage.getItem("userACC");
-var group=$('input:radio').val();
+// var acc=localStorage.getItem("userAcc");
+// var group=$('input:radio').val();
 
 //添加试卷
 $("#submit").click(function () {
     var jsonData = {
-        testAcc:acc,
-        testGroup:group,
+        testAcc:localStorage.getItem("userAcc"),
+        testTitle:$("#testTitle").val(),
+        testGroup:$("input[type='radio']:checked").val(),
     }
     $.ajax({
         url: globalUrl + "/addTestPaper",//地址
@@ -85,6 +86,7 @@ $("#submit").click(function () {
                 //添加成功
                 alert("添加成功！");
                 localStorage.setItem("testPaperId",result.testId);
+                window.parent.$('#myTable').bootstrapTable('refresh');//刷新父页面
                 reLoad();
             } else {
                 //添加失败

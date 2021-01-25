@@ -1,3 +1,7 @@
+$(function () {
+    TestPaperView();
+})
+
 $("#title").text(localStorage.getItem("testPaperName"));
 
 
@@ -14,42 +18,52 @@ $("#add").click(
     }
 )
 
-$.ajax({
+
+
+function TestPaperView(){
+    var jsonDataX = {
+        testAcc:localStorage.getItem("userAcc"),
+        testId:localStorage.getItem("testPaperId")
+    }
+
+    $.ajax({
         url: globalUrl + "/queryTestQuestion",//地址
         type: "POST",//传输方式
-        data: jsonData,//将json格式转换为字符串并进行传送
-        // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
+        data: JSON.stringify(jsonDataX),//将json格式转换为字符串并进行传送
+        contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
         dataType: "json",//传入后端的数据格式也是json
         success: function (result) {
-        console.log(result);
-        if (result.length!=null) {
-            for (var i=0;i<result.length;i++){
-                    if (result.List[i].questionType==0){
+            console.log(result);
+            if (result.length!=null) {
+                for (var i=0;i<result.length;i++){
+                    if (result.list[i].questionType==0){
                         $("#content").append(
-                            "题目：<div>result.List[i].questionTopic</div>" +
-                            "A:<div>result.List[i].singleA</div>" +
-                            "B:<div>result.List[i].singleB</div>" +
-                            "C:<div>result.List[i].singleC</div>" +
-                            "D:<div>result.List[i].singleD</div>" +
-                            "<div>答案: <span>result.List[i].questionAnswer</span> 分值:<span>result.List[i].questionScore</span></div>" +
-                            "<button onclick='deleteQuestion(result.List[i].questionId)'>删除</button>"
+                            "题目：<div>"+result.list[i].questionTopic+"</div>" +
+                            "A:<div>"+result.list[i].singleA+"</div>" +
+                            "B:<div>"+result.list[i].singleB+"</div>" +
+                            "C:<div>"+result.list[i].singleC+"</div>" +
+                            "D:<div>"+result.list[i].singleD+"</div>" +
+                            "<div>答案: <span>"+result.list[i].questionAnswer+"</span> 分值:<span>"+result.list[i].questionScore+"</span></div>" +
+                            "<button onclick='deleteQuestion(\""+result.list[i].questionId+"\")'>删除</button>"
                         )
                     }else {
                         $("#content").append(
-                            "题目：<div>result.List[i].questionTopic</div>" +
-                            "<div>答案: <span>result.List[i].questionAnswer</span> 分值:<span>result.List[i].questionScore</span></div>" +
-                            "<button onclick='deleteQuestion(result.List[i].questionId)'>删除</button>"
+                            "题目：<div>"+result.list[i].questionTopic+"</div>" +
+                            "<div>答案: <span>"+result.list[i].questionAnswer+"</span> 分值:<span>"+result.list[i].questionScore+"</span></div>" +
+                            "<button onclick='deleteQuestion(\""+result.list[i].questionId+"\")'>删除</button>"
                         )
                     }
 
-            }
+                }
 
-        } else {
-            //添加失败
-            alert("失败！ ");
+            } else {
+                //添加失败
+                alert("失败！ ");
+            }
         }
-        }
-})
+    })
+}
+
 
 $("#tiem").change(function () {
 
@@ -77,50 +91,19 @@ $("#tiem").change(function () {
 
 //删除试卷中的试题
 function deleteQuestion(id){
+    var jsonData = {
+        questionId:id
+    }
     $.ajax({
         url: globalUrl + "/deleteTestQuestion",//地址
         type: "POST",//传输方式
-        data: jsonData,//将json格式转换为字符串并进行传送
-        // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
+        data: JSON.stringify(jsonData),//将json格式转换为字符串并进行传送
+        contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
         dataType: "json",//传入后端的数据格式也是json
         success: function (result) {
                 if (result){
-                    $.ajax({
-                        url: globalUrl + "/queryTestQuestion",//地址
-                        type: "POST",//传输方式
-                        data: jsonData,//将json格式转换为字符串并进行传送
-                        // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
-                        dataType: "json",//传入后端的数据格式也是json
-                        success: function (result) {
-                            console.log(result);
-                            if (result.length!=null) {
-                                for (var i=0;i<result.length;i++){
-                                    if (result.List[i].questionType==0){
-                                        $("#content").append(
-                                            "题目：<div>result.List[i].questionTopic</div>" +
-                                            "A:<div>result.List[i].singleA</div>" +
-                                            "B:<div>result.List[i].singleB</div>" +
-                                            "C:<div>result.List[i].singleC</div>" +
-                                            "D:<div>result.List[i].singleD</div>" +
-                                            "<div>答案: <span>result.List[i].questionAnswer</span> 分值:<span>result.List[i].questionScore</span></div>" +
-                                            "<button onclick='deleteQuestion(result.List[i].questionId)'>删除</button>"
-                                        )
-                                    }else {
-                                        $("#content").append(
-                                            "题目：<div>result.List[i].questionTopic</div>" +
-                                            "<div>答案: <span>result.List[i].questionAnswer</span> 分值:<span>result.List[i].questionScore</span></div>" +
-                                            "<button onclick='deleteQuestion(result.List[i].questionId)'>删除</button>"
-                                        )
-                                    }
-
-                                }
-
-                            } else {
-                                //添加失败
-                                alert("失败！ ");
-                            }
-                        }
-                    })
+                    TestPaperView();
+                    window.location.reload();//刷新当前页面
                 }else {
 
                 }
