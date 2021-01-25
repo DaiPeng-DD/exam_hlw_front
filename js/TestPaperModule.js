@@ -70,6 +70,9 @@ function load() {
                 align:"center",
                 field:"questionId",
                 formatter:function (value,row,index) {
+                    let action ='<a href="javascript:void(0)" onclick="actionTestpaper(\''+value+'\')">开启考试 </a>'
+                    let unaction = '<a href="javascript:void(0)" onclick="unactionTestpaper(\''+value+'\')">关闭考试 </a>'
+
                     let delerow = '<a href="javascript:void(0)" onclick="deleteTestpaper(\''+value+'\')">删除 </a>'
 
                     let queryrow = '<a href="javascript:void(0)" onclick="queryTestPaper(\''+value+'\',\''+row.testTitle+'\')">详情信息</a>'
@@ -113,8 +116,57 @@ function deleteTestpaper(value) {
         }
     })
 }
+//开启考试
+function actionTestpaper(id){
+    jsonData={}
+    jsonData.questionId=id;
+    //开启考试  1开始
+    josnData.
 
+    $.ajax({
+        url: globalUrl ,//地址
+        type: "POST",//传输方式
+        data: jsonData,//将json格式转换为字符串并进行传送
+        // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
+        dataType: "json",//传入后端的数据格式也是json
+        success: function (result) {
+            console.log(result);
+            if (result) {
+                //添加成功
+                alert("已开始");
+            } else {
+                //添加失败
+                alert("开启失败 ")
+            }
+        }
+    })
+}
+//关闭考试
+function unactionTestpaper(id){
+    jsonData={}
+    jsonData.questionId=id;
+    //开启考试  0关闭
+    josnData.
 
+    $.ajax({
+        url: globalUrl ,//地址
+        type: "POST",//传输方式
+        data: jsonData,//将json格式转换为字符串并进行传送
+        // contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
+        dataType: "json",//传入后端的数据格式也是json
+        success: function (result) {
+            console.log(result);
+            if (result) {
+                //添加成功
+                alert("已关闭！");
+                reLoad();
+            } else {
+                //添加失败
+                alert("关闭失败 ")
+            }
+        }
+    })
+}
 
 
 

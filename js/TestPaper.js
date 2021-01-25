@@ -51,6 +51,30 @@ $.ajax({
         }
 })
 
+$("#tiem").change(function () {
+
+    jsonData={}
+    jsonData.questionTime=$("#tiem").val();
+
+    $.ajax({
+        url: globalUrl,//地址
+        type: "POST",//传输方式
+        data: jsonData,//将json格式转换为字符串并进行传送
+        contentType: "application/json;charset=UTF-8",//接收后端传回的数据格式是json
+        dataType: "json",//传入后端的数据格式也是json
+        success:function (result) {
+            if (result){
+                alert("修改考试时长成功");
+            }
+            else {
+                alert("修改考试时长失败");
+            }
+        }
+    })
+})
+
+
+
 //删除试卷中的试题
 function deleteQuestion(id){
     $.ajax({
