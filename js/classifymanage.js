@@ -28,7 +28,7 @@ function load() {
             var temp = {
                 offset:params.offset,//SQL语句起使索引
                 pageNumber: params.limit,//每页显示数量
-                acc:"admin"
+                acc:localStorage.getItem("userAcc")
             }
             return JSON.stringify(temp);
         },

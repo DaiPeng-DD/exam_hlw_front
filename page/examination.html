@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>考试</title>
+    <link rel="stylesheet" href="../css/examination.css">
+</head>
+<body>
+    <div id="testTitle">
+        <h1>欢 迎 使 用 天 亮 在 线 考 试 系 统</h1>
+    </div>
+    <div id="testMain">
+<!--        第一个界面  登录 并记录考生信息-->
+        <div id="loginView">
+            <div class="tubiao">
+                <img src="../image/tltubiao.jpg" alt="">
+            </div>
+            <div class="input">
+                <input type="text" placeholder="请输入姓名" name="name"><br>
+                <input type="text" placeholder="请输入手机号" name="phone"><br>
+            </div>
+            <button id="login" class="btn">
+                登 录
+            </button>
+        </div>
+<!--        第二个界面  输入考试号  -->
+        <div id="examNumber">
+            <div class="tubiao">
+                <img src="../image/tltubiao.jpg" alt="">
+            </div>
+            <div class="input">
+<!--                <input type="text" placeholder=" 请输入姓名" name="name"><br>-->
+                <input type="text" placeholder="请输入考试号" name="examNum"><br>
+            </div>
+            <button id="insert" class="btn">
+                进 入
+            </button>
+        </div>
+
+<!--        第三个界面  考试说明-->
+        <div id="examExplain">
+            <div class="tubiao">
+                <img src="../image/tltubiao.jpg" id="examImg">
+            </div>
+            <div id="explain">
+                <h2>考试说明</h2>
+                <ol>
+                    <li>考卷满分<span id="manfen">100</span>分,<span id="jige">60</span>分及格。</li>
+                    <li>考试总时长: <span id="time">30</span>分钟。</li>
+                    <li>若答题过程中异常退出，使用相同考号重新登录继续考试。</li>
+                </ol>
+            </div>
+            <button id="actionExam" class="btn">
+                开始考试
+            </button>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script src="../js/url.js"></script>
+<script src="../js/examination.js"></script>
+</html>

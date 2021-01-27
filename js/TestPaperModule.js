@@ -77,7 +77,7 @@ function load() {
 
                     let queryrow = '<a href="javascript:void(0)" onclick="queryTestPaper(\''+value+'\',\''+row.testTitle+'\')">详情信息</a>'
 
-                    return delerow+queryrow;
+                    return action+unaction+delerow+queryrow;
                 }
             }
         ]
