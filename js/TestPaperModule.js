@@ -56,6 +56,13 @@ function load() {
 
             },
             {
+                title:'考试码',
+                align:"center",
+                halign:"center",
+                field:"testUrl",
+
+            },
+            {
                 title:'添加时间',
                 align:"center",
                 halign:"center",
