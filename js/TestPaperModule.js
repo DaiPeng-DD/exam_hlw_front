@@ -82,7 +82,7 @@ function load() {
 
                     let delerow = '<a href="javascript:void(0)" onclick="deleteTestpaper(\''+value+'\')">删除 </a>'
 
-                    let queryrow = '<a href="javascript:void(0)" onclick="queryTestPaper(\''+value+'\',\''+row.testTitle+'\')">详情信息</a>'
+                    let queryrow = '<a href="javascript:void(0)" onclick="queryTestPaper(\''+value+'\',\''+row.testTitle+'\')">添加试题</a>'
 
                     return action+unaction+delerow+queryrow;
                 }

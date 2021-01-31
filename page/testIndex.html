@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统首页</title>
+    <style>
+        #indexMain{
+            width: 100%;
+            height: 430px;
+        }
+        h2{
+            width: 100%;
+            height: 50px;
+            line-height: 90px;
+            text-align: center;
+            /*margin-top: 20px;*/
+        }
+        #lineChartLeft{
+            width: 600px;
+            height: 400px;
+            float: left;
+            margin-left: 80px;
+        }
+        #lineChartRight{
+            width: 600px;
+            height: 400px;
+            float: left;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="indexMain">
+        <h2>本周答题数据</h2>
+        <div id="lineChartLeft"></div>
+        <div id="lineChartRight"></div>
+    </div>
+</body>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChartLeft = echarts.init(document.getElementById('lineChartLeft'));
+    var myChartRight = echarts.init(document.getElementById('lineChartRight'));
+
+    // 指定图表的配置项和数据
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line',
+            smooth: true
+        }]
+    };
+//左侧折线图
+    option && myChartLeft.setOption(option);
+//右侧饼图
+    myChartRight.setOption({
+        series : [
+            {
+                name: '访问来源',
+                type: 'pie',    // 设置图表类型为饼图
+                radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                data:[          // 数据数组，name 为数据项名称，value 为数据项值
+                    {value:932, name:'Tue'},
+                    {value:901, name:'Wed'},
+                    {value:934, name:'Thu'},
+                    {value:1290, name:'Fri'},
+                    {value:1330, name:'Sat'},
+                    {value:1320, name:'Sun'},
+                    {value:820, name:'Mon'}
+                ]
+            }
+        ]
+    })
+</script>
+</html>

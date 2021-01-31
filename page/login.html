@@ -44,8 +44,6 @@
 			<div class="eml"><span></span></div>
         </div>
 
-
-
         <div class="no-passwore">
             <div class="no-passwore-left">
                 <!-- <input type="checkbox" name="checkbox" id=""> -->
@@ -65,7 +63,6 @@
                 <a href="#">官方App</a>
             </div>
         </div>
-
         <div class="mailApp">
         </div>
     </div>
@@ -93,68 +90,46 @@
 
     var jsondata = {};
     $("#user_submit").click(function () {
+        jsondata.userAcc=$("#user_acc").val();
+        jsondata.userPwd=$("#user_pwd").val();
 
-           
-            jsondata.userAcc=$("#user_acc").val();
-            jsondata.userPwd=$("#user_pwd").val();
+        //管理员登录
+        if ($("#admin").css("font-size")=="18px"){
+            if ($("#user_acc").val()=="root"&&$("#user_pwd").val()=="root"){
+                alert("登陆成功");
 
-
-            if ($("#admin").css("font-size")=="18px"){
-                console.log($("#admin").css("font-size")=="18px");
-
-                if ($("#user_acc").val()=="root"&&$("#user_pwd").val()=="root"){
-                    alert("登陆成功");
-                    window.location="adminhome.html";
-
-
-                }else{
-                    alert("账号或密码错误");
-                }
-
-
-
+                localStorage.setItem("loginState",1);//用于记录是用户登录还是管理员登录  用户0   管理员1
+                console.log(localStorage.getItem("loginState"));
+                window.location="home.html";
+            }else{
+                alert("账号或密码错误");
             }
-            if ($("#client").css("font-size")=="18px"){
-                console.log($("#client").css("font-size")=="18px");
+        }
+        //用户登录
+        if ($("#client").css("font-size")=="18px"){
+            $.ajax({
+                type:"POST",
+                url:globalUrl+"/volidateUser",
+                contentType:"application/json",
+                dataType:"json",
+                data:JSON.stringify(jsondata),
+                success:function (result) {
+                    if (result!=null){
+                        alert("登陆成功");
 
-                $.ajax({
-                    type:"POST",
-                    url:globalUrl+"/volidateUser",
-                    contentType:"application/json",
-                    dataType:"json",
-                    data:JSON.stringify(jsondata),
-                    success:function (result) {
-                        // if (result.mark){
-                        //     alert("登陆成功");
-                        //
-                        //     localStorage.setItem("userAcc",$("#user_acc").val());
-                        //     localStorage.setItem("userHeadsrc",result.user.userHeadsrc);
-                        //     localStorage.setItem("userPhone",result.user.userPhone);
-                        //     localStorage.setItem("userEmail",result.user.userEamil);
-                        //
-                        //     window.location="home.html";
-                        // }
+                        localStorage.setItem("userAcc",$("#user_acc").val());
+                        localStorage.setItem("userHeadsrc",result.userHeadsrc);
+                        localStorage.setItem("userPhone",result.userPhone);
+                        localStorage.setItem("userEmail",result.userEmail);
 
-                        if (result!=null){
-                            alert("登陆成功");
-
-                            localStorage.setItem("userAcc",$("#user_acc").val());
-                            localStorage.setItem("userHeadsrc",result.userHeadsrc);
-                            localStorage.setItem("userPhone",result.userPhone);
-                            localStorage.setItem("userEmail",result.userEmail);
-
-                            window.location="home.html";
-                        }
-
+                        localStorage.setItem("loginState",0);//用于记录登录状态  用户0   管理员1
+                        window.location="home.html";
+                    }else{
+                        alert("账号或密码错误");
                     }
-                })
-
-            }
+                }
+            })
+        }
     })
-
-
 </script>
-
-
-
 </html>
